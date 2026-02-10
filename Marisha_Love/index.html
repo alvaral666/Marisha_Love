@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marisha_Love</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- Прогресс -->
+    <div id="progress" aria-label="Прогресс"></div>
+
+    <!-- Назад -->
+    <button id="backBtn" class="back-btn" hidden>шаг назад — два вперёд</button>
+
+    <!-- ЭКРАН 0: CAPTCHA -->
+    <section class="screen active theme-light-beige" id="screen-0">
+        <div class="captcha-wrap">
+            <div class="captcha-card">
+                <label class="captcha-checkbox">
+                    <input type="checkbox" id="captcha-check" />
+                    <span>Я не робот</span>
+                </label>
+
+                <div id="captcha-panel" class="captcha-panel hidden" aria-live="polite">
+                    <div class="captcha-title">Кто из них счастлив?</div>
+                    <div id="captcha-grid" class="captcha-grid"></div>
+                    <button id="captcha-confirm" class="btn btn-neutral">Подтвердить</button>
+                    <div id="captcha-msg" class="captcha-msg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 1: Вопрос -->
+    <section class="screen theme-light-pink" id="screen-1">
+        <div class="question-wrap">
+            <h1 class="main-question">Будешь ли ты моей валентинкой?</h1>
+            <div class="question-buttons">
+                <button id="btn-yes" class="btn btn-yes">Да</button>
+                <button id="btn-no" class="btn btn-no">Нет</button>
+            </div>
+            <canvas id="balloonsCanvas" class="balloons-canvas"></canvas>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 2: Письмо -->
+    <section class="screen theme-light-beige" id="screen-2">
+        <div class="letter-wrap">
+            <div id="envelope" class="envelope pulse stage-closed" role="button" tabindex="0" aria-label="Открыть конверт">
+                <div class="envelope-back"></div>
+                <div class="envelope-pocket"></div>
+                <div class="envelope-flap"></div>
+
+                <div id="letter" class="letter" aria-label="Письмо">
+                    <div class="letter-grab" id="letterGrab" title="Потяни вверх, чтобы достать письмо">⋮⋮⋮</div>
+                    <div class="letter-inner">
+                        <p class="poem-text">
+                            Прекрасен был тот милый вечер
+                            Когда в объятьях под луною
+                            Мы репетировали танец
+                            И любовался я тобою!
+                            
+                            Я очарован безмятежно
+                            Не вижу я всего вокруг
+                            Лишь на тебя смотрю я нежно
+                            А в голове гудит "Я просто друг"
+
+                            Сейчас, сквозь время и любовь
+                            В груди всё щимет постоянно
+                            И понимаю я что кровь
+                            К тебе стримтся покоянно
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="letterHint" class="letter-hint">Открой конверт, затем потяни лист вверх</div>
+            <button id="btn-letter-next" class="btn btn-neutral" disabled>Дальше</button>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 3: Match-3 -->
+    <section class="screen theme-dark-green" id="screen-3">
+        <div id="game-screen" class="game-screen">
+            <!-- cinematic layers -->
+            <div class="candle-glow left" aria-hidden="true"></div>
+            <div class="candle-glow right" aria-hidden="true"></div>
+            <div class="dust-layer" aria-hidden="true"></div>
+
+            <div class="game-ui game-top oldmoney-panel">
+                <span id="moves">Ходы: 30</span>
+            </div>
+
+            <div class="game-board-shell">
+                <div class="wood-frame">
+                    <div class="brass-corner tl"></div>
+                    <div class="brass-corner tr"></div>
+                    <div class="brass-corner bl"></div>
+                    <div class="brass-corner br"></div>
+
+                    <canvas id="gameCanvas"></canvas>
+                    <div class="grain-overlay"></div>
+                </div>
+            </div>
+
+            <div class="game-ui game-bottom oldmoney-panel">
+                <span id="score">Красные сердца: 0 / 30</span>
+                <button id="restart" class="btn btn-neutral">Перезапуск</button>
+            </div>
+
+            <div id="overlay" class="overlay" hidden></div>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 4: Мероприятия -->
+    <section class="screen theme-light-beige" id="screen-4">
+        <div class="events-wrap">
+            <h2 class="events-date">Расписание 14.02</h2>
+
+            <div class="cards-col">
+                <article class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Событие 1</div>
+                        <div class="flip-card-back">
+                            <h3>Сюрприз</h3>
+                            <p><strong>Время:</strong> 14:00</p>
+                            <p>Запечатлим нечто невероятное</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Событие 2</div>
+                        <div class="flip-card-back">
+                            <h3>Выпустим пар</h3>
+                            <p><strong>Время:</strong> 17:00</p>
+                            <p>Всё бывает в первый раз, почему бы не разделить и этот вместе?</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="flip-card" tabindex="0">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">Событие 3</div>
+                        <div class="flip-card-back">
+                            <h3>Романтический вечер</h3>
+                            <p><strong>Время:</strong> 20:00</p>
+                            <p>Уютный вечер вместе, немного воздуха, света и тепла.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="events-actions">
+                <button id="btn-events-next" class="btn btn-neutral">Дальше</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭКРАН 5: Финал -->
+    <section class="screen theme-dark-blue" id="screen-5">
+        <canvas id="finalCanvas"></canvas>
+        <div id="finalText">Я тебя безгранично люблю!</div>
+    </section>
+
+    <script src="audio.js"></script>
+    <script src="match3.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
